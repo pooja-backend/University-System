@@ -55,6 +55,27 @@ export class GetsStudentsEntity {
   @Field(() => String, { description: 'Roll no of user', nullable: true })
   roll_number: string;
 
+  @Field(() => String, { description: 'Student father name' })
+  father_name: string;
+
+  @Field(() => String, { description: 'Student mother name' })
+  mother_name: string;
+
+  @Field(() => String, { description: 'Dob of student' })
+  dob: string;
+
+  @Field(() => String, { description: 'mobile of student' })
+  mobile: string;
+
+  @Field(() => String, { description: 'Student city name' })
+  city: string;
+
+  @Field(() => String, { description: 'Student state name' })
+  state: string;
+
+  @Field(() => String, { description: 'Student address name' })
+  address: string;
+
   @Field(() => Int, { description: 'Grade point of student' })
   grade_points: number;
 

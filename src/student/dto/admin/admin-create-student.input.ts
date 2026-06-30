@@ -26,6 +26,18 @@ export class AdminCreateStudentInput {
   @IsNotEmpty()
   marks: number;
 
+  @Field(() => String, { description: 'dob of Student', nullable: true })
+  @IsString()
+  @IsOptional()
+  @IsNotEmpty()
+  dob: string;
+
+  @Field(() => String, { description: 'mobile of Student', nullable: true })
+  @IsString()
+  @IsOptional()
+  @IsNotEmpty()
+  mobile: string;
+
   @Field(() => Int, { description: 'Grade point of student' })
   @IsNumber()
   @IsPositive()
@@ -45,6 +57,31 @@ export class AdminCreateStudentInput {
   @IsString()
   @IsOptional()
   name?: string;
+
+  @Field(() => String, { description: 'father name', nullable: true })
+  @IsString()
+  @IsOptional()
+  father_name: string;
+
+  @Field(() => String, { description: 'mother name', nullable: true })
+  @IsString()
+  @IsOptional()
+  mother_name: string;
+
+  @Field(() => String, { description: 'city name', nullable: true })
+  @IsString()
+  @IsOptional()
+  city: string;
+
+  @Field(() => String, { description: 'state name', nullable: true })
+  @IsString()
+  @IsOptional()
+  state: string;
+
+  @Field(() => String, { description: 'state name', nullable: true })
+  @IsString()
+  @IsOptional()
+  address: string;
 
   @Field(() => String, { description: 'Email of user', nullable: true })
   @IsEmail()

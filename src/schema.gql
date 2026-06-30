@@ -2,14 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type RefreshToken {
-  """access token of user"""
-  access_token: String
-
-  """refresh token of user"""
-  refresh_token: String
-}
-
 type StatusEntity {
   id: Int!
   name: String
@@ -65,6 +57,44 @@ type LoginEntity {
 type AuthLoginEntity {
   """Auth login user detail"""
   user: LoginEntity
+}
+
+type ProfileEntity {
+  """Id of user"""
+  id: Int!
+
+  """User name"""
+  name: String!
+
+  """User email"""
+  email: String!
+
+  """Gender of user"""
+  gender: Gender!
+
+  """Status of user"""
+  status: StatusEntity!
+
+  """Role of user"""
+  role: LoginRoleEntity!
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+type GetProfileEntity {
+  """Profile detail of logged in user"""
+  profile: ProfileEntity!
+}
+
+type RefreshToken {
+  """access token of user"""
+  access_token: String
+
+  """refresh token of user"""
+  refresh_token: String
 }
 
 type Status {
@@ -217,7 +247,7 @@ type GetCoursesEntity {
   semesters: [GetSemestersEntity!]!
 
   """Status of course"""
-  status: StatusEntity!
+  status: StatusEntity
 }
 
 type AdminListCourseEntity {
@@ -603,6 +633,27 @@ type GetStudentsEntity {
   """Roll no of user"""
   roll_number: String
 
+  """Student father name"""
+  father_name: String!
+
+  """Student mother name"""
+  mother_name: String!
+
+  """Dob of student"""
+  dob: String!
+
+  """mobile of student"""
+  mobile: String!
+
+  """Student city name"""
+  city: String!
+
+  """Student state name"""
+  state: String!
+
+  """Student address name"""
+  address: String!
+
   """Grade point of student"""
   grade_points: Int!
 
@@ -665,6 +716,27 @@ type GetsStudentsEntity {
   """Roll no of user"""
   roll_number: String
 
+  """Student father name"""
+  father_name: String!
+
+  """Student mother name"""
+  mother_name: String!
+
+  """Dob of student"""
+  dob: String!
+
+  """mobile of student"""
+  mobile: String!
+
+  """Student city name"""
+  city: String!
+
+  """Student state name"""
+  state: String!
+
+  """Student address name"""
+  address: String!
+
   """Grade point of student"""
   grade_points: Int!
 
@@ -724,6 +796,27 @@ type GetsStudentEntity {
 
   """Roll no of user"""
   roll_number: String
+
+  """Student father name"""
+  father_name: String!
+
+  """Student mother name"""
+  mother_name: String!
+
+  """Dob of student"""
+  dob: String!
+
+  """mobile of student"""
+  mobile: String!
+
+  """Student city name"""
+  city: String!
+
+  """Student state name"""
+  state: String!
+
+  """Student address name"""
+  address: String!
 
   """Grade point of student"""
   grade_points: Int!
@@ -1174,6 +1267,9 @@ input AdminListStudentFeeInput {
 }
 
 type Mutation {
+  """User get profile page"""
+  getProfile: GetProfileEntity!
+
   """Register user with email and password"""
   register(register_input: RegisterUserInput!): AuthRegisterEntity!
 
@@ -1256,11 +1352,6 @@ input RegisterUserInput {
 
   """Status of an user"""
   status: UserRole!
-}
-
-enum Gender {
-  MALE
-  FEMALE
 }
 
 enum UserRoles {
@@ -1436,6 +1527,12 @@ input AdminCreateStudentInput {
   """Marks of Student"""
   marks: Int!
 
+  """dob of Student"""
+  dob: String
+
+  """mobile of Student"""
+  mobile: String
+
   """Grade point of student"""
   grade_points: Int!
 
@@ -1447,6 +1544,21 @@ input AdminCreateStudentInput {
 
   """Name of user"""
   name: String
+
+  """father name"""
+  father_name: String
+
+  """mother name"""
+  mother_name: String
+
+  """city name"""
+  city: String
+
+  """state name"""
+  state: String
+
+  """state name"""
+  address: String
 
   """Email of user"""
   email: String
@@ -1477,6 +1589,12 @@ input AdminUpdateStudentInput {
   """Marks of Student"""
   marks: Int!
 
+  """dob of Student"""
+  dob: String
+
+  """mobile of Student"""
+  mobile: String
+
   """Grade point of student"""
   grade_points: Int!
 
@@ -1488,6 +1606,21 @@ input AdminUpdateStudentInput {
 
   """Name of user"""
   name: String
+
+  """father name"""
+  father_name: String
+
+  """mother name"""
+  mother_name: String
+
+  """city name"""
+  city: String
+
+  """state name"""
+  state: String
+
+  """state name"""
+  address: String
 
   """Email of user"""
   email: String

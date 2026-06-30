@@ -22,6 +22,41 @@ export class Student {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({
+    type: 'varchar',
+    length: 200,
+    nullable: true,
+  })
+  father_name: string;
+
+  @Column({
+    type: 'varchar',
+    length: 200,
+    nullable: true,
+  })
+  mother_name: string;
+
+  @Column({
+    type: 'varchar',
+    length: 100,
+    nullable: true,
+  })
+  city: string;
+
+  @Column({
+    type: 'varchar',
+    length: 200,
+    nullable: true,
+  })
+  state: string;
+
+  @Column({
+    type: 'varchar',
+    length: 500,
+    nullable: true,
+  })
+  address: string;
+
   @Column({ unique: true, type: 'varchar', length: 10 })
   roll_number: string;
 
@@ -36,6 +71,18 @@ export class Student {
     nullable: true,
   })
   grade_points: number;
+
+  @Column({
+    type: 'varchar',
+    nullable: true,
+  })
+  mobile: string;
+
+  @Column({
+    type: 'date',
+    nullable: true,
+  })
+  dob: string;
 
   @Column({
     type: 'enum',

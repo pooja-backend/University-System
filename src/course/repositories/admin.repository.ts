@@ -1,10 +1,7 @@
-import {
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Course } from '../database/course.entity';
-import {  DataSource, Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { AdminCreateCourseInput } from '../dto/admin/admin-create-course.input';
 import { Status } from 'src/status/database/status.entity';
 import { Semester } from 'src/semester/database/semester.entity';
@@ -43,7 +40,8 @@ export class AdminCourseRepository {
         where: { id: adminCreateCourseInput.status },
       });
 
-      if (!status) throw new NotFoundException('Status not found');
+      if (!status)
+        throw new NotFoundException(this.i18n.t('Status.STATUS_NOT_FOUND'));
 
       const course = new Course();
       course.course_name = adminCreateCourseInput.course_name;
@@ -73,7 +71,7 @@ export class AdminCourseRepository {
   }
 
   /**
-   * @description adminGetCourse
+   * @description Admin get specific course with course id
    * @param adminGetCourseInput
    * @returns
    */
@@ -102,7 +100,7 @@ export class AdminCourseRepository {
   }
 
   /**
-   * @description adminListCourse
+   * @description Admin will listing all course with associated semesters
    * @param adminListCourseInput
    * @returns
    */
@@ -138,7 +136,7 @@ export class AdminCourseRepository {
   }
 
   /**
-   * @description Admin Update Course
+   * @description Admin Update Course with linked semesters
    * @param adminUpdateCourseInput
    * @returns
    */
@@ -168,7 +166,7 @@ export class AdminCourseRepository {
       });
 
       if (!status) {
-        throw new NotFoundException('Status not found');
+        throw new NotFoundException(this.i18n.t('Status.STATUS_NOT_FOUND'));
       }
 
       const oldSemesterCount = course.total_semesters;
@@ -215,6 +213,9 @@ export class AdminCourseRepository {
 
       return course;
     } catch (error) {
+      if (error) {
+        throw new NotFoundException(error);
+      }
       await queryRunner.rollbackTransaction();
       throw new NotFoundException(this.i18n.t('common.SOMETHING_WENT_WRONG'));
     } finally {
@@ -223,7 +224,7 @@ export class AdminCourseRepository {
   }
 
   /**
-   * @description AdminDeleteCourse
+   * @description Admin will Delete Course
    * @param adminDeleteCourseInput
    */
   async adminDeleteCourse(
@@ -231,7 +232,7 @@ export class AdminCourseRepository {
   ): Promise<void> {
     const queryRunner = AppDataSource.createQueryRunner();
     await queryRunner.startTransaction();
-    await queryRunner.connect()
+    await queryRunner.connect();
     try {
       const course = await this.courseRepository.findOne({
         where: { id: adminDeleteCourseInput.courseId },

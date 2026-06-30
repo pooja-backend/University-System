@@ -7,7 +7,7 @@ import { Student } from 'src/student/database/student.entity';
 import { FeesStructure } from 'src/fee/database/fee.entity';
 import { Role } from 'src/role/database/role.entity';
 import { AdminStudentFeeService } from './admin/admin.service';
-import { AdminStudentFeeResolver } from './admin/admin-resolver';
+import { AdminStudentFeeResolver } from './admin/admin.resolver';
 import { AdminStudentFeeRepository } from './repositories/admin.repository';
 import { StudentFeesRepository } from './repositories/student-fee.repository';
 

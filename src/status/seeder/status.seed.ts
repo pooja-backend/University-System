@@ -4,6 +4,7 @@ import { Status } from '../database/status.entity';
 
 export class StatusSeed implements Seeder {
   public async run(factory: Factory, dataSource: DataSource) {
+    const statusRepositpry = await dataSource.getRepository(Status);
     const data = [
       {
         name: 'Active',
@@ -18,7 +19,7 @@ export class StatusSeed implements Seeder {
     ];
 
     for (var i = 0; i < data.length; i++) {
-      const statusExist = await Status.findOne({
+      const statusExist = await statusRepositpry.findOne({
         where: { name: data[i].name },
       });
       if (!statusExist) {

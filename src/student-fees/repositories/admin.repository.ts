@@ -127,7 +127,8 @@ export class AdminStudentFeeRepository {
       .leftJoinAndSelect('student_fees.student', 'student')
       .leftJoinAndSelect('student.user', 'user')
       .leftJoinAndSelect('student.course', 'course')
-      .leftJoinAndSelect('student_fees.feeStructure', 'feeStructure');
+      .leftJoinAndSelect('student_fees.feeStructure', 'feeStructure')
+      .orderBy('student_fees.id','DESC')
 
     if (adminListStudentFeesInput?.search) {
       query.andWhere('LOWER(user.name) LIKE :search', {

@@ -21,6 +21,9 @@ import {
 } from 'nestjs-i18n';
 import { StudentModule } from './student/student.module';
 import { StudentFeesModule } from './student-fees/student-fees.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { StudentResultModule } from './student-result/student-result.module';
 
 @Module({
   imports: [
@@ -72,6 +75,9 @@ import { StudentFeesModule } from './student-fees/student-fees.module';
     StudentModule,
     SemesterModule,
     StudentFeesModule,
+    StudentResultModule,
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

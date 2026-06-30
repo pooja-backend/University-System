@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  HttpException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -187,6 +188,13 @@ export class AdminStudentRepository {
 
       const student = new Student();
       student.roll_number = adminCreateStudentInput.roll_number;
+      student.father_name = adminCreateStudentInput.father_name;
+      student.mother_name = adminCreateStudentInput.mother_name;
+      student.address = adminCreateStudentInput.address;
+      student.city = adminCreateStudentInput.city;
+      student.state = adminCreateStudentInput.state;
+      student.dob = adminCreateStudentInput.dob;
+      student.mobile = adminCreateStudentInput.mobile;
       student.marks = adminCreateStudentInput.marks;
       student.grade_points = adminCreateStudentInput.grade_points;
       student.course = course;
@@ -197,16 +205,11 @@ export class AdminStudentRepository {
       await queryRunner.manager.save(Student, student);
 
       await queryRunner.commitTransaction();
-
-      // const tokens = await this.authService.getTokens(
-      //   user.id,
-      //   user.email,
-      //   user.role.id,
-      // );
-
-      // await this.authService.updateRtHash(user.id, tokens.refresh_token);
     } catch (error) {
       await queryRunner.rollbackTransaction();
+      if (error) {
+        throw new NotFoundException(error);
+      }
       throw new NotFoundException(this.i18n.t('common.SOMETHING_WENT_WRONG'));
     } finally {
       await queryRunner.release();
@@ -364,6 +367,13 @@ export class AdminStudentRepository {
 
         existingStudent.roll_number = adminUpdateStudentInput.roll_number;
         existingStudent.marks = adminUpdateStudentInput.marks;
+        existingStudent.father_name = adminUpdateStudentInput.father_name;
+        existingStudent.mother_name = adminUpdateStudentInput.mother_name;
+        existingStudent.dob = adminUpdateStudentInput.dob;
+        existingStudent.mobile = adminUpdateStudentInput.mobile;
+        existingStudent.address = adminUpdateStudentInput.address;
+        existingStudent.state = adminUpdateStudentInput.state;
+        existingStudent.city = adminUpdateStudentInput.city;
         existingStudent.grade_points = adminUpdateStudentInput.grade_points;
         existingStudent.course = course;
         existingStudent.semester = semester;
@@ -371,10 +381,11 @@ export class AdminStudentRepository {
         existingStudent.result = adminUpdateStudentInput.result;
 
         await queryRunner.manager.save(Student, existingStudent);
-
         await queryRunner.commitTransaction();
+
         return;
       }
+      
 
       /**
        * Update Existing User + Student
@@ -418,6 +429,13 @@ export class AdminStudentRepository {
       await queryRunner.manager.save(User, user);
 
       existingStudent.roll_number = adminUpdateStudentInput.roll_number;
+      existingStudent.father_name = adminUpdateStudentInput.father_name;
+      existingStudent.mother_name = adminUpdateStudentInput.mother_name;
+      existingStudent.dob = adminUpdateStudentInput.dob;
+      existingStudent.mobile = adminUpdateStudentInput.mobile;
+      existingStudent.address = adminUpdateStudentInput.address;
+      existingStudent.state = adminUpdateStudentInput.state;
+      existingStudent.city = adminUpdateStudentInput.city;
       existingStudent.marks = adminUpdateStudentInput.marks;
       existingStudent.grade_points = adminUpdateStudentInput.grade_points;
       existingStudent.course = course;
@@ -425,11 +443,12 @@ export class AdminStudentRepository {
       existingStudent.result = adminUpdateStudentInput.result;
 
       await queryRunner.manager.save(Student, existingStudent);
-
       await queryRunner.commitTransaction();
     } catch (error) {
       await queryRunner.rollbackTransaction();
-      console.log(error);
+      if (error) {
+        throw new NotFoundException(error);
+      }
       throw new NotFoundException(this.i18n.t('common.SOMETHING_WENT_WRONG'));
     } finally {
       await queryRunner.release();

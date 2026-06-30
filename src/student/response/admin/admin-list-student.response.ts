@@ -29,6 +29,13 @@ export class GetUsersInfoResponse {
 export class GetStudentsResponse {
   id: number;
   roll_number: string;
+  father_name: string;
+  mother_name: string;
+  mobile: string;
+  dob: string;
+  city: string;
+  state: string;
+  address: string;
   grade_points: number;
   marks: number;
   result: ResultEnum;

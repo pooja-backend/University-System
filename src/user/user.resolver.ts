@@ -1,35 +1,22 @@
-// import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-// import { UserService } from './user.service';
-// import { CreateUserInput } from './dto/create-user.input';
-// import { UpdateUserInput } from './dto/update-user.input';
-// import { User } from './database/user.entity';
+import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { UserService } from './user.service';
+import { User } from './database/user.entity';
+import { GetProfileEntity } from './entities/get-profile.entity';
+import { CurrentUser } from './user.decorator';
+import { AtGuard } from 'src/auth/guards/at.guard';
+import PermissionGuard from 'src/auth/guards/permission.guard';
+import { UseGuards } from '@nestjs/common';
 
-// @Resolver(() => User)
-// export class UserResolver {
-//   constructor(private readonly userService: UserService) {}
+@UseGuards(AtGuard, PermissionGuard())
+@Resolver(() => User)
+export class UserResolver {
+  constructor(private readonly userService: UserService) {}
 
-//   @Mutation(() => User)
-//   createUser(@Args('createUserInput') createUserInput: CreateUserInput) {
-//     return this.userService.create(createUserInput);
-//   }
-
-//   @Query(() => [User], { name: 'user' })
-//   findAll() {
-//     return this.userService.findAll();
-//   }
-
-//   @Query(() => User, { name: 'user' })
-//   findOne(@Args('id', { type: () => Int }) id: number) {
-//     return this.userService.findOne(id);
-//   }
-
-//   @Mutation(() => User)
-//   updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
-//     return this.userService.update(updateUserInput.id, updateUserInput);
-//   }
-
-//   @Mutation(() => User)
-//   removeUser(@Args('id', { type: () => Int }) id: number) {
-//     return this.userService.remove(id);
-//   }
-// }
+  @Mutation(() => GetProfileEntity, {
+    name: 'getProfile',
+    description: 'User get profile page',
+  })
+  async getProfile(@CurrentUser() user: User) {
+    return this.userService.getProfile(user);
+  }
+}

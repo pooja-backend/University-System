@@ -34,6 +34,7 @@ export class GetCoursesEntity {
 
   @Field(() => StatusEntity, {
     description: 'Status of course',
+    nullable: true,
   })
   status: StatusEntity;
 }
