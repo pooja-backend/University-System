@@ -1,26 +1,25 @@
-import { Injectable } from '@nestjs/common';
-import { CreateStudentResultInput } from './dto/admin-get-student-result.input';
-import { UpdateStudentResultInput } from './dto/admin-list-student-result.input';
+// import { Injectable } from '@nestjs/common';
 
-@Injectable()
-export class StudentResultService {
-  create(createStudentResultInput: CreateStudentResultInput) {
-    return 'This action adds a new studentResult';
-  }
 
-  findAll() {
-    return `This action returns all studentResult`;
-  }
+// @Injectable()
+// export class StudentResultService {
+//   create(createStudentResultInput: CreateStudentResultInput) {
+//     return 'This action adds a new studentResult';
+//   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} studentResult`;
-  }
+//   findAll() {
+//     return `This action returns all studentResult`;
+//   }
 
-  update(id: number, updateStudentResultInput: UpdateStudentResultInput) {
-    return `This action updates a #${id} studentResult`;
-  }
+//   findOne(id: number) {
+//     return `This action returns a #${id} studentResult`;
+//   }
 
-  remove(id: number) {
-    return `This action removes a #${id} studentResult`;
-  }
-}
+//   update(id: number, updateStudentResultInput: UpdateStudentResultInput) {
+//     return `This action updates a #${id} studentResult`;
+//   }
+
+//   remove(id: number) {
+//     return `This action removes a #${id} studentResult`;
+//   }
+// }

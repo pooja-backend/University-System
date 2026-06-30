@@ -16,6 +16,7 @@ import {
 } from 'typeorm';
 import { ResultEnum } from '../enum/result.enum';
 import { StudentFees } from 'src/student-fees/database/student-fee.entity';
+import { StudentResult } from 'src/student-result/database/student-result.entity';
 
 @Entity('students')
 export class Student {
@@ -61,18 +62,6 @@ export class Student {
   roll_number: string;
 
   @Column({
-    type: 'int',
-    nullable: true,
-  })
-  marks: number;
-
-  @Column({
-    type: 'int',
-    nullable: true,
-  })
-  grade_points: number;
-
-  @Column({
     type: 'varchar',
     nullable: true,
   })
@@ -84,20 +73,13 @@ export class Student {
   })
   dob: string;
 
-  @Column({
-    type: 'enum',
-    nullable: true,
-    enum: ResultEnum,
-  })
-  result: ResultEnum;
-
   @ManyToOne(() => Course, (course) => course.students)
   @JoinColumn({ name: 'course_id' })
   course: Course;
 
-  @ManyToOne(() => Semester, (semester) => semester.student)
-  @JoinColumn({ name: 'semester_id' })
-  semester: Semester;
+  // @ManyToOne(() => Semester, (semester) => semester.student)
+  // @JoinColumn({ name: 'semester_id' })
+  // semester: Semester;
 
   @OneToOne(() => User, (user) => user.student, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
@@ -107,6 +89,11 @@ export class Student {
     cascade: true,
   })
   studentFees: StudentFees[];
+
+  @OneToMany(() => StudentResult, (studentResult) => studentResult.student, {
+    cascade: true,
+  })
+  studentResults: StudentResult[];
 
   @CreateDateColumn({
     type: 'timestamptz',

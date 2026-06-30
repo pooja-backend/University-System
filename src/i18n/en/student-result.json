@@ -1,0 +1,7 @@
+{
+  "STUDENT_RESULT_CREATED_SUCCESSFULLY": "Student  result created successfully",
+  "STUDENT_RESULT_UPDATED_SUCCESSFUULY": "Student  result updated successfully",
+  "STUDENT_RESULT_DELETED_SUCCESSFULLY": "Studnet result deleted successfully",
+  "STUDENT_RESULT_NOT_FOUND": "Student result not found",
+  "STUDENT_RESULT_ALREADY_EXIST": "Student result already exist with semester and Student"
+}

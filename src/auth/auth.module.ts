@@ -16,6 +16,7 @@ import { FeesStructure } from 'src/fee/database/fee.entity';
 import { JwtStrategy } from './jwt.strategy';
 import { RtStrategy } from './strategies/rt.strtegy';
 import { StudentFees } from 'src/student-fees/database/student-fee.entity';
+import { StudentResult } from 'src/student-result/database/student-result.entity';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { StudentFees } from 'src/student-fees/database/student-fee.entity';
       Student,
       FeesStructure,
       StudentFees,
+      StudentResult
     ]),
   ],
   providers: [

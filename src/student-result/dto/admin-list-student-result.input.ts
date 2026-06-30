@@ -1,10 +1,14 @@
-import { CreateStudentResultInput } from './admin-get-student-result.input';
-import { InputType, Field, Int, PartialType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
+import { Transform, TransformFnParams } from 'class-transformer';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { PaginationInput } from 'src/user/entities/pagination.entity';
 
 @InputType()
-export class UpdateStudentResultInput extends PartialType(
-  CreateStudentResultInput,
-) {
-  @Field(() => Int)
-  id: number;
+export class AdminListStudentResultInput extends PaginationInput {
+  @Field({ nullable: true, description: 'Search for better result.' })
+  @IsOptional()
+  @Transform(({ value }: TransformFnParams) => (value ? value.trim() : value))
+  @IsString({ message: 'Search must be string' })
+  @IsNotEmpty()
+  search: string;
 }

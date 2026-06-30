@@ -20,12 +20,6 @@ export class AdminCreateStudentInput {
   @IsNotEmpty()
   roll_number: string;
 
-  @Field(() => Int, { description: 'Marks of Student' })
-  @IsNumber()
-  @IsPositive()
-  @IsNotEmpty()
-  marks: number;
-
   @Field(() => String, { description: 'dob of Student', nullable: true })
   @IsString()
   @IsOptional()
@@ -37,16 +31,6 @@ export class AdminCreateStudentInput {
   @IsOptional()
   @IsNotEmpty()
   mobile: string;
-
-  @Field(() => Int, { description: 'Grade point of student' })
-  @IsNumber()
-  @IsPositive()
-  grade_points: number;
-
-  @Field(() => ResultEnum, { description: 'Result of student' })
-  @IsEnum(ResultEnum)
-  @IsNotEmpty()
-  result: ResultEnum;
 
   @Field(() => Int, { description: 'user Id', nullable: true })
   @IsNumber()
@@ -114,9 +98,4 @@ export class AdminCreateStudentInput {
   @IsNumber()
   @IsNotEmpty()
   course_id: number;
-
-  @Field(() => Int, { description: 'Semester Id' })
-  @IsNumber()
-  @IsNotEmpty()
-  semester_id: number;
 }

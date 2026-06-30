@@ -1051,6 +1051,169 @@ type AdminListStudentFeeEntity {
   count: Int
 }
 
+type GetStudentResultCourseDetailEntity {
+  """Id of course"""
+  id: Int!
+
+  """Name of course"""
+  course_name: String!
+
+  """Course Type UG/PG"""
+  course_type: CourseType!
+}
+
+type GetStudentResultSemesterDetailEntity {
+  """Id of Semester"""
+  id: Int!
+}
+
+type GetUserResultInfoEntity {
+  id: Int!
+  name: String
+  email: String
+  gender: String
+}
+
+type GetStudentResultInfoEntity {
+  """Student Id"""
+  id: Int!
+
+  """Roll no of user"""
+  roll_number: String
+
+  """Student father name"""
+  father_name: String!
+
+  """Student mother name"""
+  mother_name: String!
+
+  """Dob of student"""
+  dob: String!
+
+  """mobile of student"""
+  mobile: String!
+
+  """Student city name"""
+  city: String!
+
+  """Student state name"""
+  state: String!
+
+  """Student address name"""
+  address: String!
+
+  """User info"""
+  user: GetUserResultInfoEntity
+
+  """Course assigned to student"""
+  course: GetStudentResultCourseDetailEntity
+}
+
+type GetStudentResultEntity {
+  """Grade point of student"""
+  grade_points: Int!
+
+  """marks of student"""
+  marks: Int!
+
+  """Result status"""
+  result: ResultEnum!
+
+  """Get student data"""
+  student: GetStudentResultInfoEntity
+
+  """Semester of course"""
+  semester: GetStudentResultSemesterDetailEntity
+}
+
+type AdminGetStudentResultEntity {
+  """Admin get the student result detail"""
+  studentResults: GetStudentResultEntity
+}
+
+type GetStudentsResultCourseDetailEntity {
+  """Id of course"""
+  id: Int!
+
+  """Name of course"""
+  course_name: String!
+
+  """Course Type UG/PG"""
+  course_type: CourseType!
+}
+
+type GetStudentsResultSemesterDetailEntity {
+  """Id of Semester"""
+  id: Int!
+}
+
+type GetUsersResultInfoEntity {
+  id: Int!
+  name: String
+  email: String
+  gender: String
+}
+
+type GetStudentsResultInfoEntity {
+  """Student Id"""
+  id: Int!
+
+  """Roll no of user"""
+  roll_number: String
+
+  """Student father name"""
+  father_name: String!
+
+  """Student mother name"""
+  mother_name: String!
+
+  """Dob of student"""
+  dob: String!
+
+  """mobile of student"""
+  mobile: String!
+
+  """Student city name"""
+  city: String!
+
+  """Student state name"""
+  state: String!
+
+  """Student address name"""
+  address: String!
+
+  """User info"""
+  user: GetUsersResultInfoEntity
+
+  """Course assigned to student"""
+  course: GetStudentsResultCourseDetailEntity
+}
+
+type GetStudentsResultEntity {
+  """Grade point of student"""
+  grade_points: Int!
+
+  """marks of student"""
+  marks: Int!
+
+  """Result status"""
+  result: ResultEnum!
+
+  """Get student data"""
+  student: GetStudentsResultInfoEntity
+
+  """Semester of course"""
+  semester: GetStudentsResultSemesterDetailEntity
+}
+
+type AdminListStudentResultEntity {
+  """Admin list the student result detail"""
+  studentResults: [GetStudentsResultEntity!]
+
+  """Count result"""
+  count: Int!
+}
+
 type Query {
   status(id: Int!): Status!
   role(id: Int!): Role!
@@ -1109,6 +1272,12 @@ type Query {
 
   """Admin can view student fees record"""
   getStudentFees: GetsStudentFeeEntity!
+
+  """ admin  get the student result detail."""
+  adminGetStudentResult(admin_get_student_result_input: AdminGetStudentResultInput!): AdminGetStudentResultEntity!
+
+  """ admin  list the student result detail."""
+  adminListStudentResult(admin_list_student_result_input: AdminListStudentResultInput!): AdminListStudentResultEntity!
 }
 
 input AdminGetCourseInput {
@@ -1266,6 +1435,28 @@ input AdminListStudentFeeInput {
   search: String
 }
 
+input AdminGetStudentResultInput {
+  """Id of student  id"""
+  studentId: Int!
+
+  """Id of student result id"""
+  studentResultId: Int!
+}
+
+input AdminListStudentResultInput {
+  """No. of record which are skip."""
+  skip: Int!
+
+  """No. of record which are take(limit)."""
+  take: Int!
+
+  """Pagination true or false"""
+  pagination: Boolean! = true
+
+  """Search for better result."""
+  search: String
+}
+
 type Mutation {
   """User get profile page"""
   getProfile: GetProfileEntity!
@@ -1332,6 +1523,15 @@ type Mutation {
 
   """admin delete student fees record"""
   adminDeleteStudentFees(admin_delete_student_fee_input: AdminDeleteStudentFeeInput!): BooleanMessage!
+
+  """Create student result by admin"""
+  adminCreateStudentResult(admin_create_student_result_input: AdminCreateStudentResultInput!): BooleanMessage!
+
+  """update student result by admin"""
+  adminUpdateStudentResult(admin_update_student_result_input: AdminUpdateStudentResultInput!): BooleanMessage!
+
+  """Delete student result by admin"""
+  adminDeleteStudentResult(admin_delete_student_result_input: AdminDeleteStudentResultInput!): BooleanMessage!
 }
 
 input RegisterUserInput {
@@ -1524,20 +1724,11 @@ input AdminCreateStudentInput {
   """Roll Id of Student"""
   roll_number: String!
 
-  """Marks of Student"""
-  marks: Int!
-
   """dob of Student"""
   dob: String
 
   """mobile of Student"""
   mobile: String
-
-  """Grade point of student"""
-  grade_points: Int!
-
-  """Result of student"""
-  result: ResultEnum!
 
   """user Id"""
   user_id: Int
@@ -1577,29 +1768,17 @@ input AdminCreateStudentInput {
 
   """Course Id (Assigned to user)"""
   course_id: Int!
-
-  """Semester Id"""
-  semester_id: Int!
 }
 
 input AdminUpdateStudentInput {
   """Roll Id of Student"""
   roll_number: String!
 
-  """Marks of Student"""
-  marks: Int!
-
   """dob of Student"""
   dob: String
 
   """mobile of Student"""
   mobile: String
-
-  """Grade point of student"""
-  grade_points: Int!
-
-  """Result of student"""
-  result: ResultEnum!
 
   """user Id"""
   user_id: Int
@@ -1639,9 +1818,6 @@ input AdminUpdateStudentInput {
 
   """Course Id (Assigned to user)"""
   course_id: Int!
-
-  """Semester Id"""
-  semester_id: Int!
 
   """Student Id"""
   student_id: Int!
@@ -1697,4 +1873,52 @@ input AdminUpdateStudentFeesInput {
 input AdminDeleteStudentFeeInput {
   """Id of student-fees """
   studnetFeesId: Int!
+}
+
+input AdminCreateStudentResultInput {
+  """Marks of Student"""
+  marks: Int!
+
+  """Grade point of student"""
+  grade_points: Int!
+
+  """Result of student"""
+  result: ResultEnum!
+
+  """student Id"""
+  student_id: Int
+
+  """Course Id (Assigned to user)"""
+  course_id: Int!
+
+  """Semester Id"""
+  semester_id: Int!
+}
+
+input AdminUpdateStudentResultInput {
+  """Marks of Student"""
+  marks: Int!
+
+  """Grade point of student"""
+  grade_points: Int!
+
+  """Result of student"""
+  result: ResultEnum!
+
+  """student Id"""
+  student_id: Int
+
+  """Course Id (Assigned to user)"""
+  course_id: Int!
+
+  """Semester Id"""
+  semester_id: Int!
+
+  """Student Id"""
+  studentResultId: Int!
+}
+
+input AdminDeleteStudentResultInput {
+  """Id of student result """
+  studentResultId: Int!
 }

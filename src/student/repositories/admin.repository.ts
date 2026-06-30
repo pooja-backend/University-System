@@ -64,24 +64,6 @@ export class AdminStudentRepository {
         throw new NotFoundException(this.i18n.t('course.COURSE_NOT_FOUND'));
       }
 
-      const semester = await queryRunner.manager.findOne(Semester, {
-        where: { id: adminCreateStudentInput.semester_id },
-        relations: {
-          course: true,
-        },
-      });
-
-      if (!semester) {
-        throw new NotFoundException(this.i18n.t('semester.SEMESTER_NOT_FOUND'));
-      }
-
-      // Validate semester belongs to selected course
-      if (semester.course.id !== course.id) {
-        throw new BadRequestException(
-          this.i18n.t('semester.SEMESTER_NOT_LINKED'),
-        );
-      }
-
       /**
        * Existing User + Student Flow
        */
@@ -121,12 +103,15 @@ export class AdminStudentRepository {
 
         const student = new Student();
         student.roll_number = adminCreateStudentInput.roll_number;
-        student.marks = adminCreateStudentInput.marks;
-        student.grade_points = adminCreateStudentInput.grade_points;
+        student.father_name = adminCreateStudentInput.father_name;
+        student.mother_name = adminCreateStudentInput.mother_name;
+        student.address = adminCreateStudentInput.address;
+        student.city = adminCreateStudentInput.city;
+        student.state = adminCreateStudentInput.state;
+        student.dob = adminCreateStudentInput.dob;
+        student.mobile = adminCreateStudentInput.mobile;
         student.course = course;
-        student.semester = semester;
         student.user = user;
-        student.result = adminCreateStudentInput.result;
 
         await queryRunner.manager.save(Student, student);
 
@@ -195,12 +180,8 @@ export class AdminStudentRepository {
       student.state = adminCreateStudentInput.state;
       student.dob = adminCreateStudentInput.dob;
       student.mobile = adminCreateStudentInput.mobile;
-      student.marks = adminCreateStudentInput.marks;
-      student.grade_points = adminCreateStudentInput.grade_points;
       student.course = course;
-      student.semester = semester;
       student.user = user;
-      student.result = adminCreateStudentInput.result;
 
       await queryRunner.manager.save(Student, student);
 
@@ -309,25 +290,6 @@ export class AdminStudentRepository {
         throw new NotFoundException(this.i18n.t('course.COURSE_NOT_FOUND'));
       }
 
-      const semester = await queryRunner.manager.findOne(Semester, {
-        where: {
-          id: adminUpdateStudentInput.semester_id,
-        },
-        relations: {
-          course: true,
-        },
-      });
-
-      if (!semester) {
-        throw new NotFoundException(this.i18n.t('semester.SEMESTER_NOT_FOUND'));
-      }
-
-      if (semester.course.id !== course.id) {
-        throw new BadRequestException(
-          this.i18n.t('semester.SEMESTER_NOT_LINKED'),
-        );
-      }
-
       /**
        * Existing User + Student Flow
        */
@@ -366,7 +328,7 @@ export class AdminStudentRepository {
         }
 
         existingStudent.roll_number = adminUpdateStudentInput.roll_number;
-        existingStudent.marks = adminUpdateStudentInput.marks;
+
         existingStudent.father_name = adminUpdateStudentInput.father_name;
         existingStudent.mother_name = adminUpdateStudentInput.mother_name;
         existingStudent.dob = adminUpdateStudentInput.dob;
@@ -374,18 +336,16 @@ export class AdminStudentRepository {
         existingStudent.address = adminUpdateStudentInput.address;
         existingStudent.state = adminUpdateStudentInput.state;
         existingStudent.city = adminUpdateStudentInput.city;
-        existingStudent.grade_points = adminUpdateStudentInput.grade_points;
+
         existingStudent.course = course;
-        existingStudent.semester = semester;
+
         existingStudent.user = user;
-        existingStudent.result = adminUpdateStudentInput.result;
 
         await queryRunner.manager.save(Student, existingStudent);
         await queryRunner.commitTransaction();
 
         return;
       }
-      
 
       /**
        * Update Existing User + Student
@@ -436,11 +396,8 @@ export class AdminStudentRepository {
       existingStudent.address = adminUpdateStudentInput.address;
       existingStudent.state = adminUpdateStudentInput.state;
       existingStudent.city = adminUpdateStudentInput.city;
-      existingStudent.marks = adminUpdateStudentInput.marks;
-      existingStudent.grade_points = adminUpdateStudentInput.grade_points;
+
       existingStudent.course = course;
-      existingStudent.semester = semester;
-      existingStudent.result = adminUpdateStudentInput.result;
 
       await queryRunner.manager.save(Student, existingStudent);
       await queryRunner.commitTransaction();

@@ -15,6 +15,7 @@ import { Course } from 'src/course/database/course.entity';
 import { Subject } from 'src/subject/database/subject.entity';
 import { Student } from 'src/student/database/student.entity';
 import { FeesStructure } from 'src/fee/database/fee.entity';
+import { StudentResult } from 'src/student-result/database/student-result.entity';
 
 @Entity('semesters')
 export class Semester {
@@ -35,8 +36,13 @@ export class Semester {
   @OneToMany(() => Subject, (subject) => subject.semester, { cascade: true })
   subjects: Subject[];
 
-  @OneToMany(() => Student, (student) => student.semester, { cascade: true })
-  student: Student[];
+  // @OneToMany(() => Student, (student) => student.semester, { cascade: true })
+  // student: Student[];
+
+  @OneToMany(() => StudentResult, (studentResult) => studentResult.semester, {
+    cascade: true,
+  })
+  studentResults: StudentResult[];
 
   @OneToMany(() => FeesStructure, (fs) => fs.semester, { cascade: true })
   fees: FeesStructure[];

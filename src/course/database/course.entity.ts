@@ -15,6 +15,7 @@ import { Student } from 'src/student/database/student.entity';
 import { FeesStructure } from 'src/fee/database/fee.entity';
 import { Status } from 'src/status/database/status.entity';
 import { CourseType } from '../enums/course.enum';
+import { StudentResult } from 'src/student-result/database/student-result.entity';
 
 @Entity('courses')
 export class Course {
@@ -53,6 +54,11 @@ export class Course {
 
   @OneToMany(() => Student, (student) => student.course, { cascade: true })
   students: Student[];
+
+  @OneToMany(() => StudentResult, (studentResult) => studentResult.course, {
+    cascade: true,
+  })
+  studentResults: StudentResult[];
 
   @OneToMany(() => FeesStructure, (feeS) => feeS.course, { cascade: true })
   fees: FeesStructure[];
