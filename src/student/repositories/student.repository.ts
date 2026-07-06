@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Student } from '../database/student.entity';
 import { Repository } from 'typeorm';
-import { GetStudentInput } from '../dto/get-student.input';
 import { User } from 'src/user/database/user.entity';
 
 @Injectable()
@@ -24,7 +23,6 @@ export class StudentRepository {
       .leftJoinAndSelect('user.status', 'status')
       .leftJoinAndSelect('user.role', 'role')
       .leftJoinAndSelect('student.course', 'course')
-      .leftJoinAndSelect('student.semester', 'semester')
       .where('user.id=:studentId', {
         studentId: user.id,
       });

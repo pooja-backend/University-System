@@ -4,10 +4,11 @@ import { FeesStructure } from './database/fee.entity';
 import { UseGuards } from '@nestjs/common';
 import { AtGuard } from 'src/auth/guards/at.guard';
 import PermissionGuard from 'src/auth/guards/permission.guard';
-import { GetFeesInput } from './dto/get-fees.input';
 import { GetFeeEntity } from './entities/get-fee.entity';
 import { ListsFeeEntity } from './entities/list-fees-entity';
 import { ListFeesInput } from './dto/list-fees.input';
+import { CurrentUser } from 'src/user/user.decorator';
+import { User } from 'src/user/database/user.entity';
 
 @UseGuards(AtGuard, PermissionGuard())
 @Resolver(() => FeesStructure)
@@ -19,10 +20,8 @@ export class FeeResolver {
     name: 'getFees',
     description: ' get the fees.',
   })
-  async getSubject(
-    @Args('get_fees_input') getFeesInput: GetFeesInput,
-  ): Promise<GetFeeEntity> {
-    return this.feeService.getFees(getFeesInput);
+  async getSubject(@CurrentUser() user: User): Promise<GetFeeEntity> {
+    return this.feeService.getFees(user);
   }
 
   //   2.ListFees

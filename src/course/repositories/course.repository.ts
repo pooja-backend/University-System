@@ -1,15 +1,11 @@
-import {
-  Injectable,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Course } from '../database/course.entity';
-import {  DataSource, Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import { Status } from 'src/status/database/status.entity';
 import { Semester } from 'src/semester/database/semester.entity';
-
-import { GetCourseInput } from '../dto/get-course.input';
 import { ListCourseInput } from '../dto/list-course.input';
-
+import { User } from 'src/user/database/user.entity';
 
 @Injectable()
 export class CourseRepository {
@@ -23,16 +19,12 @@ export class CourseRepository {
     private readonly dataSource: DataSource,
   ) {}
 
-
-
   /**
    * @description adminGetCourse
    * @param adminGetCourseInput
    * @returns
    */
-  async getCourse(
-    getCourseInput: GetCourseInput,
-  ): Promise<Course | null> {
+  async getCourse(user: User): Promise<Course | null> {
     const query = await this.courseRepository
       .createQueryBuilder('course')
       .select([
@@ -47,9 +39,13 @@ export class CourseRepository {
       ])
       .leftJoin('course.status', 'status')
       .leftJoin('course.semesters', 'semesters')
-      .where('course.id=:courseId', {
-        courseId: getCourseInput.course_id,
-      });
+      .leftJoin('course.students', 'students')
+      .leftJoin('students.user', 'user')
+      .where('user.id=:studentId', {
+        studentId: user.id,
+      })
+      .orderBy('semesters.id', 'ASC');
+
     const result = await query.getOne();
     return result;
   }
@@ -89,5 +85,4 @@ export class CourseRepository {
     // console.log(list);
     return list;
   }
-
 }

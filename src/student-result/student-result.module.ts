@@ -10,6 +10,9 @@ import { Semester } from 'src/semester/database/semester.entity';
 import { AdminStudentResultResolver } from './admin/admin.resolver';
 import { AdminStudentResultService } from './admin/admin.service';
 import { AdminStudentResultRepository } from './repositories/admin.repository';
+import { StudentResultResolver } from './student-result.resolver';
+import { StudentResultService } from './student-result.service';
+import { StudentResultRepository } from './repositories/student-result.repository';
 
 @Module({
   imports: [
@@ -19,6 +22,9 @@ import { AdminStudentResultRepository } from './repositories/admin.repository';
     AdminStudentResultResolver,
     AdminStudentResultService,
     AdminStudentResultRepository,
+    StudentResultResolver,
+    StudentResultService,
+    StudentResultRepository,
   ],
 })
 export class StudentResultModule {}

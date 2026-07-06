@@ -4,8 +4,8 @@ import { FeesStructure } from '../database/fee.entity';
 import { Course } from 'src/course/database/course.entity';
 import { Repository } from 'typeorm';
 import { Semester } from 'src/semester/database/semester.entity';
-import { GetFeesInput } from '../dto/get-fees.input';
 import { ListFeesInput } from '../dto/list-fees.input';
+import { User } from 'src/user/database/user.entity';
 
 @Injectable()
 export class FeeRepository {
@@ -22,7 +22,7 @@ export class FeeRepository {
    * @param getFeesInput
    * @returns
    */
-  async getFees(getFeesInput: GetFeesInput): Promise<FeesStructure | null> {
+  async getFees(user: User): Promise<FeesStructure | null> {
     const query = await this.feesRepository
       .createQueryBuilder('fees')
       .select([
@@ -37,8 +37,10 @@ export class FeeRepository {
         'semester.id',
       ])
       .leftJoin('fees.course', 'course')
+      .leftJoin('course.students', 'students')
+      .leftJoin('students.user', 'user')
       .leftJoin('fees.semester', 'semester')
-      .where('fees.id=:feeId', { feeId: getFeesInput.feesId });
+      .where('user.id=:studentId', { studentId: user.id });
 
     const result = await query.getOne();
     return result;

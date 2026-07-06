@@ -1,44 +1,26 @@
-// import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-// import { StudentResultService } from './student-result.service';
-// import { StudentResult } from './entities/student-result.entity';
-// import { CreateStudentResultInput } from './dto/admin-get-student-result.input';
-// import { UpdateStudentResultInput } from './dto/admin-list-student-result.input';
+import { UseGuards } from '@nestjs/common';
+import { AtGuard } from 'src/auth/guards/at.guard';
+import PermissionGuard from 'src/auth/guards/permission.guard';
+import {  Query, Resolver } from '@nestjs/graphql';
+import { CurrentUser } from 'src/user/user.decorator';
+import { User } from 'src/user/database/user.entity';
+import { StudentResultService } from './student-result.service';
+import { StudentResult } from './database/student-result.entity';
+import { GetStudentResultsEntity } from './entities/get-student-result.entity';
 
-// @Resolver(() => StudentResult)
-// export class StudentResultResolver {
-//   constructor(private readonly studentResultService: StudentResultService) {}
+@UseGuards(AtGuard, PermissionGuard())
+@Resolver(() => StudentResult)
+export class StudentResultResolver {
+  constructor(private readonly studentResultService: StudentResultService) {}
 
-//   @Mutation(() => StudentResult)
-//   createStudentResult(
-//     @Args('createStudentResultInput')
-//     createStudentResultInput: CreateStudentResultInput,
-//   ) {
-//     return this.studentResultService.create(createStudentResultInput);
-//   }
-
-//   @Query(() => [StudentResult], { name: 'studentResult' })
-//   findAll() {
-//     return this.studentResultService.findAll();
-//   }
-
-//   @Query(() => StudentResult, { name: 'studentResult' })
-//   findOne(@Args('id', { type: () => Int }) id: number) {
-//     return this.studentResultService.findOne(id);
-//   }
-
-//   @Mutation(() => StudentResult)
-//   updateStudentResult(
-//     @Args('updateStudentResultInput')
-//     updateStudentResultInput: UpdateStudentResultInput,
-//   ) {
-//     return this.studentResultService.update(
-//       updateStudentResultInput.id,
-//       updateStudentResultInput,
-//     );
-//   }
-
-//   @Mutation(() => StudentResult)
-//   removeStudentResult(@Args('id', { type: () => Int }) id: number) {
-//     return this.studentResultService.remove(id);
-//   }
-// }
+  // 1.GetStudentResult
+  @Query(() => GetStudentResultsEntity, {
+    name: 'getStudentResult',
+    description: '   get the student result detail.',
+  })
+  async getStudentResult(
+    @CurrentUser() user: User,
+  ): Promise<GetStudentResultsEntity> {                                                                           
+    return this.studentResultService.getStudentResult(user);
+  }
+}

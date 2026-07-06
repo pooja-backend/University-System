@@ -5,13 +5,13 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { AdminStudentResultService } from './admin.service';
 import { BooleanMessage } from 'src/user/entities/boolean-message.entity';
 import { AdminCreateStudentResultInput } from '../dto/admin/admin-create-student-result.input';
-import { StudentResult } from '../entities/student-result.entity';
 import { AdminGetStudentResultEntity } from '../entities/admin/admin-get-student-result.entity';
-import { AdminGetStudentResultInput } from '../dto/admin-get-student-result.input';
-import { AdminListStudentResultInput } from '../dto/admin-list-student-result.input';
+import { AdminGetStudentResultInput } from '../dto/admin/admin-get-student-result.input';
+import { AdminListStudentResultInput } from '../dto/admin/admin-list-student-result.input';
 import { AdminListStudentResultEntity } from '../entities/admin/admin-list-student-result.entity';
 import { AdminDeleteStudentResultInput } from '../dto/admin/admin-delete-student-result.input';
 import { AdminUpdateStudentResultInput } from '../dto/admin/admin-update-student-result.input';
+import { StudentResult } from '../database/student-result.entity';
 
 @UseGuards(AtGuard, PermissionGuard())
 @Resolver(() => StudentResult)
@@ -34,7 +34,7 @@ export class AdminStudentResultResolver {
     );
   }
 
-  //   // 2.AdminGetStudentResult
+    // 2.AdminGetStudentResult
   @Query(() => AdminGetStudentResultEntity, {
     name: 'adminGetStudentResult',
     description: ' admin  get the student result detail.',
@@ -48,7 +48,7 @@ export class AdminStudentResultResolver {
     );
   }
 
-  //   // 3.AdminListStudentResult
+    // 3.AdminListStudentResult
   @Query(() => AdminListStudentResultEntity, {
     name: 'adminListStudentResult',
     description: ' admin  list the student result detail.',
@@ -62,7 +62,7 @@ export class AdminStudentResultResolver {
     );
   }
 
-  //   // 4.AdminUpdateStudentResult
+    // 4.AdminUpdateStudentResult
   @Mutation(() => BooleanMessage, {
     name: 'adminUpdateStudentResult',
     description: 'update student result by admin',
@@ -76,7 +76,7 @@ export class AdminStudentResultResolver {
     );
   }
 
-  //   // 5.AdminDeleteStudentResult
+    // 5.AdminDeleteStudentResult
   @Mutation(() => BooleanMessage, {
     name: 'adminDeleteStudentResult',
     description: 'Delete student result by admin',

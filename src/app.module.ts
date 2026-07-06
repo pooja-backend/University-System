@@ -24,6 +24,7 @@ import { StudentFeesModule } from './student-fees/student-fees.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { StudentResultModule } from './student-result/student-result.module';
+import { DashbaordModule } from './dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -76,6 +77,7 @@ import { StudentResultModule } from './student-result/student-result.module';
     SemesterModule,
     StudentFeesModule,
     StudentResultModule,
+    DashbaordModule,
   ],
   controllers: [AppController],
   providers: [AppService],

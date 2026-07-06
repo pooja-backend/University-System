@@ -188,10 +188,7 @@ export class AdminStudentRepository {
       await queryRunner.commitTransaction();
     } catch (error) {
       await queryRunner.rollbackTransaction();
-      if (error) {
-        throw new NotFoundException(error);
-      }
-      throw new NotFoundException(this.i18n.t('common.SOMETHING_WENT_WRONG'));
+      throw new NotFoundException(error);
     } finally {
       await queryRunner.release();
     }
@@ -403,10 +400,7 @@ export class AdminStudentRepository {
       await queryRunner.commitTransaction();
     } catch (error) {
       await queryRunner.rollbackTransaction();
-      if (error) {
-        throw new NotFoundException(error);
-      }
-      throw new NotFoundException(this.i18n.t('common.SOMETHING_WENT_WRONG'));
+      throw new NotFoundException(error);
     } finally {
       await queryRunner.release();
     }

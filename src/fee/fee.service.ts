@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { FeeRepository } from './repositories/fees.repository';
 import { I18nService } from 'nestjs-i18n';
-import { GetFeesInput } from './dto/get-fees.input';
 import { GetFeeEntity } from './entities/get-fee.entity';
 import { GetFeesResponse } from './response/get-fees.response';
 import { ListFeesInput } from './dto/list-fees.input';
 import { ListsFeeEntity } from './entities/list-fees-entity';
 import { ListFeesResponse } from './response/list-fees.response';
+import { User } from 'src/user/database/user.entity';
 
 @Injectable()
 export class FeeService {
@@ -20,8 +20,8 @@ export class FeeService {
    * @param getFeesInput
    * @returns
    */
-  async getFees(getFeesInput: GetFeesInput): Promise<GetFeeEntity> {
-    const fees = await this.feesRepository.getFees(getFeesInput);
+  async getFees(user: User): Promise<GetFeeEntity> {
+    const fees = await this.feesRepository.getFees(user);
 
     if (!fees) {
       throw new NotFoundException(this.i18n.t('fees.FEES_NOT_FOUND'));

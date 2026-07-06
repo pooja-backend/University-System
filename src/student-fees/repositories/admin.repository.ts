@@ -1,5 +1,4 @@
 import {
-  
   BadRequestException,
   Injectable,
   NotFoundException,
@@ -62,7 +61,17 @@ export class AdminStudentFeeRepository {
         this.i18n.t('student-fees.FEES_CAN_NOT_BE_EXCEED'),
       );
     }
-
+    const existingStudentFees = await this.studentFeeRepository.findOne({
+      where: {
+        student: { id: adminCreateStudentFeeInput.student_id },
+      },
+      relations: { student: true },
+    });
+    if (existingStudentFees) {
+      throw new BadRequestException(
+        this.i18n.t('student-fees.STUDENT_ALREADY_EXIST'),
+      );
+    }
     // 5.Check pending fees
     const due_amount = fees.total_fee - adminCreateStudentFeeInput.amount_paid;
     const queryRunner = AppDataSource.createQueryRunner();
@@ -128,7 +137,7 @@ export class AdminStudentFeeRepository {
       .leftJoinAndSelect('student.user', 'user')
       .leftJoinAndSelect('student.course', 'course')
       .leftJoinAndSelect('student_fees.feeStructure', 'feeStructure')
-      .orderBy('student_fees.id','DESC')
+      .orderBy('student_fees.id', 'DESC');
 
     if (adminListStudentFeesInput?.search) {
       query.andWhere('LOWER(user.name) LIKE :search', {

@@ -1,5 +1,4 @@
 import { Course } from 'src/course/database/course.entity';
-import { Semester } from 'src/semester/database/semester.entity';
 import { User } from 'src/user/database/user.entity';
 import {
   Entity,
@@ -14,9 +13,9 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
 } from 'typeorm';
-import { ResultEnum } from '../enum/result.enum';
 import { StudentFees } from 'src/student-fees/database/student-fee.entity';
 import { StudentResult } from 'src/student-result/database/student-result.entity';
+import { Semester } from 'src/semester/database/semester.entity';
 
 @Entity('students')
 export class Student {

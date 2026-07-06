@@ -75,6 +75,7 @@ export class AdminStudentService {
   /**
    * @description Admin will update existing Student
    * @param adminUpdateStudentInput
+   * 
    */
   async adminUpdateStudent(
     adminUpdateStudentInput: AdminUpdateStudentInput,

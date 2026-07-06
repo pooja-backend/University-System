@@ -1,6 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { CourseType } from 'src/course/enums/course.enum';
-import { ResultEnum } from 'src/student/enum/result.enum';
 import {
   StatusEntity,
   UserRegisterRoleEntity,
@@ -76,14 +75,14 @@ export class GetsStudentEntity {
   @Field(() => String, { description: 'Student address name' })
   address: string;
 
-  @Field(() => Int, { description: 'Grade point of student' })
-  grade_points: number;
+  // @Field(() => Int, { description: 'Grade point of student' })
+  // grade_points: number;
 
-  @Field(() => Int, { description: 'marks of student' })
-  marks: number;
+  // @Field(() => Int, { description: 'marks of student' })
+  // marks: number;
 
-  @Field(() => ResultEnum, { description: 'Result status' })
-  result: ResultEnum;
+  // @Field(() => ResultEnum, { description: 'Result status' })
+  // result: ResultEnum;
 
   @Field(() => GetsUserInfoEntity, { description: 'User info', nullable: true })
   user: GetsUserInfoEntity;
@@ -94,11 +93,11 @@ export class GetsStudentEntity {
   })
   course: GetsStudentCourseDetailEntity;
 
-  @Field(() => GetsStudentSemesterDetailEntity, {
-    description: 'Semester of course',
-    nullable: true,
-  })
-  semester: GetsStudentSemesterDetailEntity;
+  // @Field(() => GetsStudentSemesterDetailEntity, {
+  //   description: 'Semester of course',
+  //   nullable: true,
+  // })
+  // semesters: GetsStudentSemesterDetailEntity;
 }
 @ObjectType()
 export class GetStudentEntity {

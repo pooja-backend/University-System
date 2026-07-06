@@ -53,6 +53,16 @@ export class AdminFeesRepository {
         this.i18n.t('semester.SEMESTER_NOT_LINKED'),
       );
     }
+    const existingFeesDetail = await this.feesRepository.findOne({
+      where: {
+        course: { id: adminCreateFeesInput.course_id },
+        semester: { id: adminCreateFeesInput.semester_id },
+      },
+      relations: { course: true, semester: true },
+    });
+    if (existingFeesDetail) {
+      throw new BadRequestException(this.i18n.t('fees.COURSE_ALREADY_EXIST'));
+    }
     // total fees
     const totalFee =
       adminCreateFeesInput.tuition_fees +

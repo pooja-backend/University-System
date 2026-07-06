@@ -76,14 +76,14 @@ export class GetStudentsEntity {
   @Field(() => String, { description: 'Student address name' })
   address: string;
 
-  @Field(() => Int, { description: 'Grade point of student' })
-  grade_points: number;
+  // @Field(() => Int, { description: 'Grade point of student' })
+  // grade_points: number;
 
-  @Field(() => Int, { description: 'marks of student' })
-  marks: number;
+  // @Field(() => Int, { description: 'marks of student' })
+  // marks: number;
 
-  @Field(() => ResultEnum, { description: 'Result status' })
-  result: ResultEnum;
+  // @Field(() => ResultEnum, { description: 'Result status' })
+  // result: ResultEnum;
 
   @Field(() => GetUserInfoEntity, { description: 'User info', nullable: true })
   user: GetUserInfoEntity;
@@ -94,11 +94,11 @@ export class GetStudentsEntity {
   })
   course: GetStudentCourseDetailEntity;
 
-  @Field(() => GetStudentSemesterDetailEntity, {
-    description: 'Semester of course',
-    nullable: true,
-  })
-  semester: GetStudentSemesterDetailEntity;
+  // @Field(() => GetStudentSemesterDetailEntity, {
+  //   description: 'Semester of course',
+  //   nullable: true,
+  // })
+  // semester: GetStudentSemesterDetailEntity;
 }
 @ObjectType()
 export class AdminGetStudentEntity {

@@ -611,11 +611,6 @@ type GetStudentCourseDetailEntity {
   course_type: CourseType!
 }
 
-type GetStudentSemesterDetailEntity {
-  """Id of Semester"""
-  id: Int!
-}
-
 type GetUserInfoEntity {
   id: Int!
   name: String
@@ -654,28 +649,11 @@ type GetStudentsEntity {
   """Student address name"""
   address: String!
 
-  """Grade point of student"""
-  grade_points: Int!
-
-  """marks of student"""
-  marks: Int!
-
-  """Result status"""
-  result: ResultEnum!
-
   """User info"""
   user: GetUserInfoEntity
 
   """Course assigned to student"""
   course: GetStudentCourseDetailEntity
-
-  """Semester of course"""
-  semester: GetStudentSemesterDetailEntity
-}
-
-enum ResultEnum {
-  PASS
-  FAIL
 }
 
 type AdminGetStudentEntity {
@@ -692,11 +670,6 @@ type GetStudentsCourseFeeDetailEntity {
 
   """Course Type UG/PG"""
   course_type: CourseType!
-}
-
-type GetStudentsSemesterFeeDetailEntity {
-  """Id of Semester"""
-  id: Int!
 }
 
 type GetUsersInfoEntity {
@@ -737,23 +710,11 @@ type GetsStudentsEntity {
   """Student address name"""
   address: String!
 
-  """Grade point of student"""
-  grade_points: Int!
-
-  """marks of student"""
-  marks: Int!
-
-  """Result status"""
-  result: ResultEnum!
-
   """User info"""
   user: GetUsersInfoEntity
 
   """Course assigned to student"""
   course: GetStudentsCourseFeeDetailEntity
-
-  """Semester of course"""
-  semester: GetStudentsSemesterFeeDetailEntity
 }
 
 type AdminListStudentEntity {
@@ -773,11 +734,6 @@ type GetsStudentCourseDetailEntity {
 
   """Course Type UG/PG"""
   course_type: CourseType!
-}
-
-type GetsStudentSemesterDetailEntity {
-  """Id of Semester"""
-  id: Int!
 }
 
 type GetsUserInfoEntity {
@@ -818,23 +774,11 @@ type GetsStudentEntity {
   """Student address name"""
   address: String!
 
-  """Grade point of student"""
-  grade_points: Int!
-
-  """marks of student"""
-  marks: Int!
-
-  """Result status"""
-  result: ResultEnum!
-
   """User info"""
   user: GetsUserInfoEntity
 
   """Course assigned to student"""
   course: GetsStudentCourseDetailEntity
-
-  """Semester of course"""
-  semester: GetsStudentSemesterDetailEntity
 }
 
 type GetStudentEntity {
@@ -1126,6 +1070,11 @@ type GetStudentResultEntity {
   semester: GetStudentResultSemesterDetailEntity
 }
 
+enum ResultEnum {
+  PASS
+  FAIL
+}
+
 type AdminGetStudentResultEntity {
   """Admin get the student result detail"""
   studentResults: GetStudentResultEntity
@@ -1214,6 +1163,92 @@ type AdminListStudentResultEntity {
   count: Int!
 }
 
+type GetStudentResultCourseInfoEntity {
+  """Id of course"""
+  id: Int!
+
+  """Name of course"""
+  course_name: String!
+
+  """Course Type UG/PG"""
+  course_type: CourseType!
+}
+
+type GetsUserResultInfoEntity {
+  id: Int!
+  name: String
+  email: String
+  gender: String
+}
+
+type GetsStudentResultInfoEntity {
+  """Student Id"""
+  id: Int!
+
+  """Roll no of user"""
+  roll_number: String
+
+  """Student father name"""
+  father_name: String!
+
+  """Student mother name"""
+  mother_name: String!
+
+  """Dob of student"""
+  dob: String!
+
+  """mobile of student"""
+  mobile: String!
+
+  """Student city name"""
+  city: String!
+
+  """Student state name"""
+  state: String!
+
+  """Student address name"""
+  address: String!
+
+  """User info"""
+  user: GetsUserResultInfoEntity
+}
+
+type GetsStudentResultEntity {
+  """Grade point of student"""
+  grade_points: Int!
+
+  """marks of student"""
+  marks: Int!
+
+  """Result status"""
+  result: ResultEnum!
+
+  """Get student data"""
+  student: GetsStudentResultInfoEntity
+
+  """Course assigned to student"""
+  course: GetStudentResultCourseInfoEntity
+}
+
+type GetStudentResultsEntity {
+  """ student result detail"""
+  studentResult: GetsStudentResultEntity
+}
+
+type AdminTotalCountEntity {
+  """Will show count accordingly"""
+  activeStudentCount: Int!
+
+  """Will show count accordingly"""
+  activeCourseCount: Int!
+
+  """Will show count accordingly"""
+  activeSubjectCount: Int!
+
+  """Will show count accordingly"""
+  activeSemestertCount: Int!
+}
+
 type Query {
   status(id: Int!): Status!
   role(id: Int!): Role!
@@ -1225,7 +1260,7 @@ type Query {
   adminListCourse(admin_list_course_input: AdminListCourseInput!): AdminListCourseEntity!
 
   """ get the Course."""
-  getCourse(get_course_input: GetCourseInput!): GetsCoursesEntity!
+  getCourse: GetsCoursesEntity!
 
   """ list the Course."""
   listCourse(admin_list_course_input: ListCourseInput!): ListsCourseEntity!
@@ -1243,7 +1278,7 @@ type Query {
   adminListSubject(admin_list_subject_input: AdminListSubjectInput!): AdminListSubjectEntity!
 
   """ get the fees."""
-  getFees(get_fees_input: GetFeesInput!): GetFeeEntity!
+  getFees: GetFeeEntity!
 
   """ list the fees."""
   listFees(list_fees_input: ListFeesInput!): ListsFeeEntity!
@@ -1278,6 +1313,12 @@ type Query {
 
   """ admin  list the student result detail."""
   adminListStudentResult(admin_list_student_result_input: AdminListStudentResultInput!): AdminListStudentResultEntity!
+
+  """   get the student result detail."""
+  getStudentResult: GetStudentResultsEntity!
+
+  """Admin count active student"""
+  adminDashboardCount: AdminTotalCountEntity!
 }
 
 input AdminGetCourseInput {
@@ -1297,11 +1338,6 @@ input AdminListCourseInput {
 
   """Search params."""
   search: String
-}
-
-input GetCourseInput {
-  """Id of course """
-  course_id: Int!
 }
 
 input ListCourseInput {
@@ -1354,11 +1390,6 @@ input AdminListSubjectInput {
 
   """Search the custom notification."""
   search: String
-}
-
-input GetFeesInput {
-  """Id of fees """
-  feesId: Int!
 }
 
 input ListFeesInput {

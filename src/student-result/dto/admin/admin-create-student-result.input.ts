@@ -9,10 +9,6 @@ import {
   IsString,
 } from 'class-validator';
 import { ResultEnum } from 'src/student/enum/result.enum';
-import { Gender } from 'src/user/enums/gender.enum';
-import { StatusEnum } from 'src/user/enums/status.enums';
-import { UserRoles } from 'src/user/enums/user-role.enum';
-
 @InputType()
 export class AdminCreateStudentResultInput {
   @Field(() => Int, { description: 'Marks of Student' })

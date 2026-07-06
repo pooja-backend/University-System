@@ -36,15 +36,15 @@ export class GetStudentResponse {
   city: string;
   state: string;
   address: string;
-  grade_points: number;
-  marks: number;
-  result: ResultEnum;
+  // grade_points: number;
+  // marks: number;
+  // result: ResultEnum;
   @Type(() => GetUserInfoResponse)
   user: GetUserInfoResponse;
   @Type(() => GetStudentCourseDetailResponse)
   course: GetStudentCourseDetailResponse;
-  @Type(() => GetStudentSemesterDetailResponse)
-  semester: GetStudentSemesterDetailResponse;
+  // @Type(() => GetStudentSemesterDetailResponse)
+  // semester: GetStudentSemesterDetailResponse;
 }
 export class AdminGetStudentResponse {
   @Type(() => GetStudentResponse)

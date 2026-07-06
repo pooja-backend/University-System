@@ -4,10 +4,10 @@ import { I18nService } from 'nestjs-i18n';
 import { BooleanMessage } from 'src/user/entities/boolean-message.entity';
 
 import { AdminCreateStudentResultInput } from '../dto/admin/admin-create-student-result.input';
-import { AdminGetStudentResultInput } from '../dto/admin-get-student-result.input';
+import { AdminGetStudentResultInput } from '../dto/admin/admin-get-student-result.input';
 import { AdminGetStudentResultEntity } from '../entities/admin/admin-get-student-result.entity';
 import { AdminGetStudentResultResponse } from '../response/admin/admin-get-student-result.response';
-import { AdminListStudentResultInput } from '../dto/admin-list-student-result.input';
+import { AdminListStudentResultInput } from '../dto/admin/admin-list-student-result.input';
 import { AdminListStudentResultEntity } from '../entities/admin/admin-list-student-result.entity';
 import { AdminListStudentResultResponse } from '../response/admin/admin-list-student-result.response';
 import { AdminDeleteStudentResultInput } from '../dto/admin/admin-delete-student-result.input';

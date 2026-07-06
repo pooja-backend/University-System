@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CourseRepository } from './repositories/course.repository';
-import { GetCourseInput } from './dto/get-course.input';
 import { GetsCoursesEntity } from './entities/get-course.entity';
 import { ListCourseInput } from './dto/list-course.input';
 import { GetsCourseResponse } from './response/get-course.response';
 import { ListCourseResponse } from './response/list-course.response';
 import { ListsCourseEntity } from './entities/list-course.entity';
 import { I18nService } from 'nestjs-i18n';
+import { User } from 'src/user/database/user.entity';
 
 @Injectable()
 export class CourseService {
@@ -20,8 +20,8 @@ export class CourseService {
    * @param getCourseInput
    * @returns
    */
-  async getCourse(getCourseInput: GetCourseInput): Promise<GetsCoursesEntity> {
-    const course = await this.courseRepository.getCourse(getCourseInput);
+  async getCourse(user: User): Promise<GetsCoursesEntity> {
+    const course = await this.courseRepository.getCourse(user);
 
     if (!course) {
       throw new NotFoundException(this.i18n.t('course.COURSE_NOT_FOUND'));
