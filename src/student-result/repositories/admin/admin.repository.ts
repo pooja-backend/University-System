@@ -9,14 +9,14 @@ import { DataSource, Repository } from 'typeorm';
 import { Course } from 'src/course/database/course.entity';
 import { Semester } from 'src/semester/database/semester.entity';
 import { I18nService } from 'nestjs-i18n';
-import { StudentResult } from '../database/student-result.entity';
+import { StudentResult } from '../../database/student-result.entity';
 import { AppDataSource } from 'app-data-source';
-import { AdminCreateStudentResultInput } from '../dto/admin/admin-create-student-result.input';
+import { AdminCreateStudentResultInput } from '../../dto/admin/admin-create-student-result.input';
 import { Student } from 'src/student/database/student.entity';
-import { AdminGetStudentResultInput } from '../dto/admin/admin-get-student-result.input';
-import { AdminListStudentResultInput } from '../dto/admin/admin-list-student-result.input';
-import { AdminDeleteStudentResultInput } from '../dto/admin/admin-delete-student-result.input';
-import { AdminUpdateStudentResultInput } from '../dto/admin/admin-update-student-result.input';
+import { AdminGetStudentResultInput } from '../../dto/admin/admin-get-student-result.input';
+import { AdminListStudentResultInput } from '../../dto/admin/admin-list-student-result.input';
+import { AdminDeleteStudentResultInput } from '../../dto/admin/admin-delete-student-result.input';
+import { AdminUpdateStudentResultInput } from '../../dto/admin/admin-update-student-result.input';
 
 @Injectable()
 export class AdminStudentResultRepository {

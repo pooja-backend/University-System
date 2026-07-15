@@ -7,20 +7,21 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/user/database/user.entity';
 import { DataSource, Repository } from 'typeorm';
-import { Student } from '../database/student.entity';
+import { Student } from '../../database/student.entity';
 import { Course } from 'src/course/database/course.entity';
 import { Semester } from 'src/semester/database/semester.entity';
-import { AdminCreateStudentInput } from '../dto/admin/admin-create-student.input';
+import { AdminCreateStudentInput } from '../../dto/admin/admin-create-student.input';
 import { I18nService } from 'nestjs-i18n';
 import * as bcrypt from 'bcrypt';
 import { Role } from 'src/role/database/role.entity';
 import { Status } from 'src/status/database/status.entity';
 import { AuthService } from 'src/auth/auth.service';
-import { AdminGetStudentInput } from '../dto/admin/admin-get-student.input';
-import { AdminListStudentInput } from '../dto/admin/admin-list-student.input';
-import { AdminDeleteStudentInput } from '../dto/admin/admin-delete-student.input';
+import { AdminGetStudentInput } from '../../dto/admin/admin-get-student.input';
+import { AdminListStudentInput } from '../../dto/admin/admin-list-student.input';
+import { AdminDeleteStudentInput } from '../../dto/admin/admin-delete-student.input';
 import { AppDataSource } from 'app-data-source';
-import { AdminUpdateStudentInput } from '../dto/admin/admin-update-student.input';
+import { AdminUpdateStudentInput } from '../../dto/admin/admin-update-student.input';
+import { Media } from 'src/media/database/media.entity';
 
 @Injectable()
 export class AdminStudentRepository {
@@ -160,7 +161,15 @@ export class AdminStudentRepository {
         adminCreateStudentInput.password,
         salt,
       );
-
+      // Upload user profile picture
+      const profilePicture = await queryRunner.manager.findOne(Media, {
+        where: {
+          id: adminCreateStudentInput.profile_picture,
+        },
+      });
+      if (!profilePicture) {
+        throw new NotFoundException(this.i18n.t('media.IMAGE_NOT_FOUND'));
+      }
       const user = new User();
       user.email = adminCreateStudentInput.email ?? user.email;
       user.name = adminCreateStudentInput.name ?? user.name;
@@ -168,6 +177,7 @@ export class AdminStudentRepository {
       user.role = role;
       user.status = status;
       user.password = passwordHash;
+      user.profile_image = profilePicture;
 
       await queryRunner.manager.save(User, user);
 

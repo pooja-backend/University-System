@@ -6,15 +6,15 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Student } from 'src/student/database/student.entity';
 import { Repository } from 'typeorm';
-import { StudentFees } from '../database/student-fee.entity';
+import { StudentFees } from '../../database/student-fee.entity';
 import { FeesStructure } from 'src/fee/database/fee.entity';
 import { I18nService } from 'nestjs-i18n';
-import { AdminCreateStudentFeeInput } from '../dto/admin/admin-create-student-fees.input';
+import { AdminCreateStudentFeeInput } from '../../dto/admin/admin-create-student-fees.input';
 import { AppDataSource } from 'app-data-source';
-import { AdminGetStudentFeeInput } from '../dto/admin/admin-get-student-fees.input';
-import { AdminListStudentFeeInput } from '../dto/admin/admin-list-student-fees.input';
-import { AdminDeleteStudentFeeInput } from '../dto/admin/admin-delete-student-fees.input';
-import { AdminUpdateStudentFeesInput } from '../dto/admin/admin-update-student-fee.input';
+import { AdminGetStudentFeeInput } from '../../dto/admin/admin-get-student-fees.input';
+import { AdminListStudentFeeInput } from '../../dto/admin/admin-list-student-fees.input';
+import { AdminDeleteStudentFeeInput } from '../../dto/admin/admin-delete-student-fees.input';
+import { AdminUpdateStudentFeesInput } from '../../dto/admin/admin-update-student-fee.input';
 
 @Injectable()
 export class AdminStudentFeeRepository {

@@ -7,6 +7,7 @@ import {
   DeleteDateColumn,
   Entity,
   Index,
+  JoinColumn,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -14,6 +15,7 @@ import {
 } from 'typeorm';
 import { Gender } from '../enums/gender.enum';
 import { Student } from 'src/student/database/student.entity';
+import { Media } from 'src/media/database/media.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -64,6 +66,9 @@ export class User extends BaseEntity {
 
   @OneToOne(() => Student, (student) => student.user, { cascade: true })
   student: Student;
+
+  @ManyToOne(() => Media, (media) => media.id)
+  profile_image: Media;
 
   @CreateDateColumn({
     type: 'timestamptz',

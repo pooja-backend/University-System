@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { AdminStudentResolver } from './admin/admin.resolver';
 import { AdminStudentService } from './admin/admin.service';
-import { AdminStudentRepository } from './repositories/admin.repository';
+import { AdminStudentRepository } from './repositories/admin/admin.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/user/database/user.entity';
 import { Student } from './database/student.entity';

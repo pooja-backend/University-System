@@ -1249,6 +1249,11 @@ type AdminTotalCountEntity {
   activeSemestertCount: Int!
 }
 
+type Media {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
 type Query {
   status(id: Int!): Status!
   role(id: Int!): Role!
@@ -1319,6 +1324,7 @@ type Query {
 
   """Admin count active student"""
   adminDashboardCount: AdminTotalCountEntity!
+  media(id: Int!): Media!
 }
 
 input AdminGetCourseInput {
@@ -1563,6 +1569,9 @@ type Mutation {
 
   """Delete student result by admin"""
   adminDeleteStudentResult(admin_delete_student_result_input: AdminDeleteStudentResultInput!): BooleanMessage!
+  createMedia(createMediaInput: CreateMediaInput!): Media!
+  updateMedia(updateMediaInput: UpdateMediaInput!): Media!
+  removeMedia(id: Int!): Media!
 }
 
 input RegisterUserInput {
@@ -1791,6 +1800,9 @@ input AdminCreateStudentInput {
   """Gender of user"""
   gender: Gender
 
+  """Profile Picture Id"""
+  profile_picture: Int
+
   """Status of an user"""
   status: UserRole
 
@@ -1840,6 +1852,9 @@ input AdminUpdateStudentInput {
 
   """Gender of user"""
   gender: Gender
+
+  """Profile Picture Id"""
+  profile_picture: Int
 
   """Status of an user"""
   status: UserRole
@@ -1952,4 +1967,15 @@ input AdminUpdateStudentResultInput {
 input AdminDeleteStudentResultInput {
   """Id of student result """
   studentResultId: Int!
+}
+
+input CreateMediaInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateMediaInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
 }

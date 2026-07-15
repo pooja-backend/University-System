@@ -82,6 +82,11 @@ export class AdminCreateStudentInput {
   @IsOptional()
   gender?: Gender;
 
+  @Field(() => Int, { nullable: true, description: 'Profile Picture Id' })
+  @IsOptional()
+  @IsPositive({ message: 'Profile picture should be positive' })
+  profile_picture: number;
+
   @Field(() => StatusEnum, { description: 'Status of an user', nullable: true })
   @IsOptional()
   status?: StatusEnum;

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CourseService } from './course.service';
 import { CourseResolver } from './course.resolver';
-import { AdminCourseRepository } from './repositories/admin.repository';
+import { AdminCourseRepository } from './repositories/admin/admin.repository';
 import { AdminCourseService } from './admin/admin.service';
 import { AdminCourseResolver } from './admin/admin.resolver';
 import { TypeOrmModule } from '@nestjs/typeorm';

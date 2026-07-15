@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { AdminStudentRepository } from '../repositories/admin.repository';
+import { AdminStudentRepository } from '../repositories/admin/admin.repository';
 import { I18nService } from 'nestjs-i18n';
 import { AdminCreateStudentInput } from '../dto/admin/admin-create-student.input';
 import { BooleanMessage } from 'src/user/entities/boolean-message.entity';
@@ -75,7 +75,7 @@ export class AdminStudentService {
   /**
    * @description Admin will update existing Student
    * @param adminUpdateStudentInput
-   * 
+   *
    */
   async adminUpdateStudent(
     adminUpdateStudentInput: AdminUpdateStudentInput,
