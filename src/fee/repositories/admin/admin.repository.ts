@@ -4,16 +4,16 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FeesStructure } from '../database/fee.entity';
+import { FeesStructure } from '../../database/fee.entity';
 import { Repository } from 'typeorm';
 import { Course } from 'src/course/database/course.entity';
 import { Semester } from 'src/semester/database/semester.entity';
 import { I18nService } from 'nestjs-i18n';
-import { AdminCreateFeesInput } from '../dto/admin/admin-create-fees-input';
-import { AdminUpdateFeesInput } from '../dto/admin/admin-update-fees.input';
-import { AdminGetFeesInput } from '../dto/admin/admin-get-fees.input';
-import { AdminListFeesInput } from '../dto/admin/admin-list-fees.input';
-import { AdminDeleteFeesInput } from '../dto/admin/admin-delete-fees.input';
+import { AdminCreateFeesInput } from '../../dto/admin/admin-create-fees-input';
+import { AdminUpdateFeesInput } from '../../dto/admin/admin-update-fees.input';
+import { AdminGetFeesInput } from '../../dto/admin/admin-get-fees.input';
+import { AdminListFeesInput } from '../../dto/admin/admin-list-fees.input';
+import { AdminDeleteFeesInput } from '../../dto/admin/admin-delete-fees.input';
 
 @Injectable()
 export class AdminFeesRepository {

@@ -1,15 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Course } from '../database/course.entity';
+import { Course } from '../../database/course.entity';
 import { DataSource, Repository } from 'typeorm';
-import { AdminCreateCourseInput } from '../dto/admin/admin-create-course.input';
+import { AdminCreateCourseInput } from '../../dto/admin/admin-create-course.input';
 import { Status } from 'src/status/database/status.entity';
 import { Semester } from 'src/semester/database/semester.entity';
-import { AdminGetCourseInput } from '../dto/admin/admin-get-course.input';
-import { AdminListCourseInput } from '../dto/admin/admin-list-course.input';
-import { AdminDeleteCourseInput } from '../dto/admin/admin-delete-course.input';
+import { AdminGetCourseInput } from '../../dto/admin/admin-get-course.input';
+import { AdminListCourseInput } from '../../dto/admin/admin-list-course.input';
+import { AdminDeleteCourseInput } from '../../dto/admin/admin-delete-course.input';
 import { AppDataSource } from 'app-data-source';
-import { AdminUpdateCourseInput } from '../dto/admin/admin-update-course.input';
+import { AdminUpdateCourseInput } from '../../dto/admin/admin-update-course.input';
 import { I18nService } from 'nestjs-i18n';
 
 @Injectable()

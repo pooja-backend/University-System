@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { AdminStudentResultRepository } from '../repositories/admin.repository';
+import { AdminStudentResultRepository } from '../repositories/admin/admin.repository';
 import { I18nService } from 'nestjs-i18n';
 import { BooleanMessage } from 'src/user/entities/boolean-message.entity';
 

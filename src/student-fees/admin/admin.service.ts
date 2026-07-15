@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { AdminStudentFeeRepository } from '../repositories/admin.repository';
+import { AdminStudentFeeRepository } from '../repositories/admin/admin.repository';
 import { I18nService } from 'nestjs-i18n';
 import { AdminCreateStudentFeeInput } from '../dto/admin/admin-create-student-fees.input';
 import { BooleanMessage } from 'src/user/entities/boolean-message.entity';

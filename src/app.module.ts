@@ -25,6 +25,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { StudentResultModule } from './student-result/student-result.module';
 import { DashbaordModule } from './dashboard/dashboard.module';
+import { FileUploadModule } from './file-upload/file-upload.module';
+import { MediaModule } from './media/media.module';
 
 @Module({
   imports: [
@@ -78,6 +80,8 @@ import { DashbaordModule } from './dashboard/dashboard.module';
     StudentFeesModule,
     StudentResultModule,
     DashbaordModule,
+    FileUploadModule,
+    MediaModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -9,7 +9,7 @@ import { Semester } from 'src/semester/database/semester.entity';
 import { Role } from 'src/role/database/role.entity';
 import { AdminFeesResolver } from './admin/admin.resolver';
 import { AdminFeesService } from './admin/admin.service';
-import { AdminFeesRepository } from './repositories/admin.repository';
+import { AdminFeesRepository } from './repositories/admin/admin.repository';
 import { FeeRepository } from './repositories/fees.repository';
 
 @Module({

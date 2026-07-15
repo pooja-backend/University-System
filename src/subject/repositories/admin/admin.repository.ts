@@ -4,16 +4,16 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Subject } from '../database/subject.entity';
+import { Subject } from '../../database/subject.entity';
 import { Repository } from 'typeorm';
 import { Course } from 'src/course/database/course.entity';
 import { Semester } from 'src/semester/database/semester.entity';
-import { AdminCreateSubjectInput } from '../dto/admin/admin-create-subject.input';
+import { AdminCreateSubjectInput } from '../../dto/admin/admin-create-subject.input';
 import { I18nService } from 'nestjs-i18n';
-import { AdminGetSubjectInput } from '../dto/admin/admin-get-subject-input';
-import { AdminListSubjectInput } from '../dto/admin/admin-list-subject.input';
-import { AdminDeleteSubjectInput } from '../dto/admin/admin-delete-subject.input';
-import { AdminUpdateSubjectInput } from '../dto/admin/admin-update-subject.input';
+import { AdminGetSubjectInput } from '../../dto/admin/admin-get-subject-input';
+import { AdminListSubjectInput } from '../../dto/admin/admin-list-subject.input';
+import { AdminDeleteSubjectInput } from '../../dto/admin/admin-delete-subject.input';
+import { AdminUpdateSubjectInput } from '../../dto/admin/admin-update-subject.input';
 
 @Injectable()
 export class AdminSubjectRepository {

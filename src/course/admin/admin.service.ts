@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { AdminCourseRepository } from '../repositories/admin.repository';
+import { AdminCourseRepository } from '../repositories/admin/admin.repository';
 import { AdminCreateCourseInput } from '../dto/admin/admin-create-course.input';
 import { BooleanMessage } from 'src/user/entities/boolean-message.entity';
 import { AdminGetCourseInput } from '../dto/admin/admin-get-course.input';

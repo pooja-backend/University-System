@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { AdminSubjectRepository } from '../repositories/admin.repository';
+import { AdminSubjectRepository } from '../repositories/admin/admin.repository';
 import { BooleanMessage } from 'src/user/entities/boolean-message.entity';
 import { AdminCreateSubjectInput } from '../dto/admin/admin-create-subject.input';
 import { I18nService } from 'nestjs-i18n';
